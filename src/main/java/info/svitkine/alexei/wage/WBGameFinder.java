@@ -17,7 +17,7 @@ public class WBGameFinder {
 			ResourceModel model = new ResourceModel(file.getName());
 			RandomAccessFile raf;
 			try {
-				raf = new RandomAccessFile(file.getPath() + "/rsrc", "r");
+				raf = new RandomAccessFile(file.getPath() + "/..namedfork/rsrc", "r");
 				model.read(raf);
 				if (model.getResourceType("ASCN") != null) {
 					return true;

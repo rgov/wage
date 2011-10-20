@@ -109,7 +109,7 @@ public class WorldLoader {
 			raf.seek(mbh.getResForkOffset());
 			model.read(raf, mbh.getResForkOffset());
 		} else {
-			raf = new RandomAccessFile(file.getPath() + "/rsrc", "r");
+			raf = new RandomAccessFile(file.getPath() + "/..namedfork/rsrc", "r");
 			model.read(raf);
 		}
 		return model;
