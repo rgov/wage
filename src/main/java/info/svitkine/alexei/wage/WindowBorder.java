@@ -24,6 +24,7 @@ public class WindowBorder extends AbstractBorder {
 	public static final int SCROLL_DOWN = 10;
 	public static final int BORDER_SHAPE = 11;
 	public static final int NUM_LOCATIONS = 12;
+	public static final int WIDTH = 17;
 
 	private String title = null;
 	private boolean closeable = true;
@@ -42,23 +43,22 @@ public class WindowBorder extends AbstractBorder {
 	public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
 		Color oldColor = g.getColor();
 
-		final int size = 17;
-		drawBox(g, x, y, size, size);
-		drawBox(g, x+width-size-1, y, size, size);
-		drawBox(g, x+width-size-1, y+height-size-1, size, size);
-		drawBox(g, x, y+height-size-1, size, size);
-		drawBox(g, x + size, y + 2, width - 2*size - 1, size - 4);
-		drawBox(g, x + size, y + height - size + 1, width - 2*size - 1, size - 4);
-		drawBox(g, x + 2, y + size, size - 4, height - 2*size - 1);
-		drawBox(g, x + width - size + 1, y + size, size - 4, height - 2*size-1);
+		drawBox(g, x, y, WIDTH, WIDTH);
+		drawBox(g, x+width-WIDTH-1, y, WIDTH, WIDTH);
+		drawBox(g, x+width-WIDTH-1, y+height-WIDTH-1, WIDTH, WIDTH);
+		drawBox(g, x, y+height-WIDTH-1, WIDTH, WIDTH);
+		drawBox(g, x + WIDTH, y + 2, width - 2*WIDTH - 1, WIDTH - 4);
+		drawBox(g, x + WIDTH, y + height - WIDTH + 1, width - 2*WIDTH - 1, WIDTH - 4);
+		drawBox(g, x + 2, y + WIDTH, WIDTH - 4, height - 2*WIDTH - 1);
+		drawBox(g, x + width - WIDTH + 1, y + WIDTH, WIDTH - 4, height - 2*WIDTH-1);
 
 		if (active) {
 			g.setColor(Color.BLACK);
-			g.fillRect(x + size, y + 5, width - 2*size - 1, 8);
-			g.fillRect(x + size, y + height - 13, width - 2*size - 1, 8);
-			g.fillRect(x + 5, y + size, 8, height - 2*size - 1);
+			g.fillRect(x + WIDTH, y + 5, width - 2*WIDTH - 1, 8);
+			g.fillRect(x + WIDTH, y + height - 13, width - 2*WIDTH - 1, 8);
+			g.fillRect(x + 5, y + WIDTH, 8, height - 2*WIDTH - 1);
 			if (!scrollable) {
-				g.fillRect(x + width - 13, y + size, 8, height - 2*size - 1);
+				g.fillRect(x + width - 13, y + WIDTH, 8, height - 2*WIDTH - 1);
 			} else {
 				int pixels[][] = new int[][] {
 						{0,0,0,0,0,1,1,0,0,0,0,0},
@@ -70,7 +70,7 @@ public class WindowBorder extends AbstractBorder {
 				final int h = pixels.length;
 				final int w = pixels[0].length;
 				int x1 = x + width - 15;
-				int y1 = y + size + 1;
+				int y1 = y + WIDTH + 1;
 				for (int yy = 0; yy < h; yy++) {
 					for (int xx = 0; xx < w; xx++) {
 						if (pixels[yy][xx] != 0) {
@@ -78,8 +78,8 @@ public class WindowBorder extends AbstractBorder {
 						}
 					}
 				}
-				g.fillRect(x + width - 13, y + size + h, 8, height - 2*size - 1 - h*2);
-				y1 += height - 2*size - h - 2;
+				g.fillRect(x + width - 13, y + WIDTH + h, 8, height - 2*WIDTH - 1 - h*2);
+				y1 += height - 2*WIDTH - h - 2;
 				for (int yy = 0; yy < h; yy++) {
 					for (int xx = 0; xx < w; xx++) {
 						if (pixels[h-yy-1][xx] != 0) {
@@ -101,15 +101,15 @@ public class WindowBorder extends AbstractBorder {
 			// TODO: This "Chicago" is not faithful to the original one on the Mac.
 			Font f = new Font("Chicago", Font.BOLD, 12);
 			int w = g.getFontMetrics(f).stringWidth(title) + 6;
-			int maxWidth = width - size*2 - 7;
+			int maxWidth = width - WIDTH*2 - 7;
 			if (w > maxWidth) {
 				w = maxWidth;
 			}
-			drawBox(g, x + (width - w) / 2, y, w, size);
+			drawBox(g, x + (width - w) / 2, y, w, WIDTH);
 			g.setFont(f);
 			Shape clip = g.getClip();
-			g.setClip(x + (width - w) / 2, y, w, size);
-			g.drawString(title, x + (width - w) / 2 + 3, y + size - 4);
+			g.setClip(x + (width - w) / 2, y, w, WIDTH);
+			g.drawString(title, x + (width - w) / 2 + 3, y + WIDTH - 4);
 			g.setClip(clip);
 		}
 
@@ -143,19 +143,18 @@ public class WindowBorder extends AbstractBorder {
 
 	private Shape getBorderShape(JComponent c) {
 		Area area = new Area();
-		final int size = 17;
 		int x = 0;
 		int y = 0;
 		int width = c.getWidth();
 		int height = c.getHeight();
-		area.add(new Area(new Rectangle(x, y, size, size)));
-		area.add(new Area(new Rectangle(x+width-size-1, y, size, size)));
-		area.add(new Area(new Rectangle(x+width-size-1, y+height-size-1, size, size)));
-		area.add(new Area(new Rectangle(x, y+height-size-1, size, size)));
-		area.add(new Area(new Rectangle(x + size, y + 2, width - 2*size - 1, size - 4)));
-		area.add(new Area(new Rectangle(x + size, y + height - size + 1, width - 2*size - 1, size - 4)));
-		area.add(new Area(new Rectangle(x + 2, y + size, size - 4, height - 2*size - 1)));
-		area.add(new Area(new Rectangle(x + width - size + 1, y + size, size - 4, height - 2*size-1)));
+		area.add(new Area(new Rectangle(x, y, WIDTH, WIDTH)));
+		area.add(new Area(new Rectangle(x+width-WIDTH-1, y, WIDTH, WIDTH)));
+		area.add(new Area(new Rectangle(x+width-WIDTH-1, y+height-WIDTH-1, WIDTH, WIDTH)));
+		area.add(new Area(new Rectangle(x, y+height-WIDTH-1, WIDTH, WIDTH)));
+		area.add(new Area(new Rectangle(x + WIDTH, y + 2, width - 2*WIDTH - 1, WIDTH - 4)));
+		area.add(new Area(new Rectangle(x + WIDTH, y + height - WIDTH + 1, width - 2*WIDTH - 1, WIDTH - 4)));
+		area.add(new Area(new Rectangle(x + 2, y + WIDTH, WIDTH - 4, height - 2*WIDTH - 1)));
+		area.add(new Area(new Rectangle(x + width - WIDTH + 1, y + WIDTH, WIDTH - 4, height - 2*WIDTH-1)));
 		return area;
 	}
 	
@@ -165,9 +164,8 @@ public class WindowBorder extends AbstractBorder {
 			shapes[CLOSE_BOX] = new Rectangle(5, 5, 9, 9);
 		}
 		if (scrollable) {
-			final int size = 17;
-			shapes[SCROLL_UP] = new Rectangle(c.getWidth() - 16, size + 1, 13, 12);
-			shapes[SCROLL_DOWN] = new Rectangle(c.getWidth() - 16, c.getHeight() - size - 14, 13, 12);
+			shapes[SCROLL_UP] = new Rectangle(c.getWidth() - 16, WIDTH + 1, 13, 12);
+			shapes[SCROLL_DOWN] = new Rectangle(c.getWidth() - 16, c.getHeight() - WIDTH - 14, 13, 12);
 		}
  		shapes[BORDER_SHAPE] = getBorderShape(c);
 		return shapes;
