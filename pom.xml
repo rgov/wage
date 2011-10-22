@@ -7,6 +7,9 @@
   <version>snapshot</version>
   <description/>
   <dependencies/>
+  <properties>
+    <project.build.sourceEncoding>MacRoman</project.build.sourceEncoding>
+  </properties>
   <build>
     <plugins>
       <plugin>
