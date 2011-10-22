@@ -12,4 +12,4 @@ You can build wage with [Apache Maven](http://maven.apache.org) using
 
 You can then run wage with
 
-`$ java -jar target/wage-snapshot-jar-with-dependencies.jar`
+`$ java -jar target/wage-snapshot.jar`
