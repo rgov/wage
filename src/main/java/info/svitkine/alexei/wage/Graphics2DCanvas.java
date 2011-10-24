@@ -7,6 +7,7 @@ import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Area;
 
+
 public class Graphics2DCanvas implements Canvas {
 	private Graphics2D g2d;
 

@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
 import javax.swing.event.MouseInputAdapter;
 
+
 public abstract class Dialog extends JComponent {
 	private String text;
 	private DialogButton[] buttons;

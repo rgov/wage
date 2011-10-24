@@ -3,6 +3,7 @@ package info.svitkine.alexei.wage;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class RandomHat<T> {
 	private HashMap<T, Integer> tokens;
 

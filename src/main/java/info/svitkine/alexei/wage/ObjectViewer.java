@@ -1,7 +1,9 @@
 package info.svitkine.alexei.wage;
 
 import java.awt.*;
+
 import javax.swing.*;
+
 
 public class ObjectViewer extends JPanel {
 	private static final long serialVersionUID = 1L;

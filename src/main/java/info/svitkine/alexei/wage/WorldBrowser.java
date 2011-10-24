@@ -29,6 +29,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 
+
 public class WorldBrowser extends JPanel {
 	private static final long serialVersionUID = 4725978893229240988L;
 	private World world;

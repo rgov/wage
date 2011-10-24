@@ -3,6 +3,7 @@ package info.svitkine.alexei.wage;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 
+
 public class GameOverDialog extends Dialog {
 	public GameOverDialog(ActionListener actionListener, String message) {
 		super(actionListener, message,

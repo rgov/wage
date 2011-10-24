@@ -17,6 +17,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
 public class Design {
 	private byte[] data;
 	private Rectangle bounds;

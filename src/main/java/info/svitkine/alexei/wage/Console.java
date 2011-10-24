@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.io.InputStream;
 import java.io.PrintStream;
 
+
 public interface Console {
 	public void postUpdateUI();
 

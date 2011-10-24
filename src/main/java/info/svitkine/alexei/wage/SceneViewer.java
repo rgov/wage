@@ -6,17 +6,16 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 import javax.swing.border.Border;
 
+import lombok.Getter;
+
+
 public class SceneViewer extends JPanel {
 	private TexturePaint[] patterns;
-	private Scene scene;
+	@Getter private Scene scene;
 
 	public SceneViewer(TexturePaint[] patterns) {
 		this.patterns = patterns;
 		setOpaque(false);
-	}
-	
-	public Scene getScene() {
-		return scene;
 	}
 	
 	public void setScene(Scene scene) {

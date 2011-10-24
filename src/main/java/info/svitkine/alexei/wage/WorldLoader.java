@@ -23,9 +23,11 @@ import org.freeshell.gbsmith.rescafe.MacBinaryHeader;
 
 import com.fizzysoft.sdu.RecentDocumentsManager;
 
+import lombok.Getter;
+
 
 public class WorldLoader {
-	private static WorldLoader instance;
+	@Getter(lazy = true) private static final WorldLoader instance = new WorldLoader();
 
 	private RecentDocumentsManager rdm;
 	
@@ -58,12 +60,6 @@ public class WorldLoader {
 				}
 			}
 		};
-	}
-
-	public static WorldLoader getInstance() {
-		if (instance == null)
-			instance = new WorldLoader();
-		return instance;
 	}
 	
 	public RecentDocumentsManager getRecentDocumentsManager() {
@@ -158,7 +154,7 @@ public class WorldLoader {
 				
 				int signature = in.readInt();
 				world.setSignature(signature);	// unique world ID
-				initialState.setWorldSig(signature);
+				initialState.setWorldSignature(signature);
 				
 				in.skip(6);
 				byte b = in.readByte();
@@ -429,7 +425,7 @@ public class WorldLoader {
 			chr.setPhysicalAccuracy(in.readUnsignedByte());
 			
 			chr.setSpiritualStrength(in.readUnsignedByte());
-			chr.setSpiritialHp(in.readUnsignedByte());
+			chr.setSpiritualHp(in.readUnsignedByte());
 			chr.setResistanceToMagic(in.readUnsignedByte());
 			chr.setSpiritualAccuracy(in.readUnsignedByte());
 			

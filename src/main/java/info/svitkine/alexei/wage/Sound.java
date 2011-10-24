@@ -4,11 +4,14 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.SourceDataLine;
 
+import lombok.Getter;
+import lombok.Setter;
+
 
 public class Sound {
 	private static final byte[] DELTAS = new byte[] {0,-49,-36,-25,-16,-9,-4,-1,0,1,4,9,16,25,36,49};
 
-	private String name;
+	@Getter @Setter private String name;
 	private byte[] data;
 	private byte[] buf;
 
@@ -27,14 +30,6 @@ public class Sound {
 			buf[i] = (byte) value;
 			prevValue = value;
 		}
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public void play() {

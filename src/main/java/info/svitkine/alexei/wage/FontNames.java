@@ -1,5 +1,6 @@
 package info.svitkine.alexei.wage;
 
+
 public class FontNames {
 	private static final String[] FONTS = {
 			"Chicago",	// system font

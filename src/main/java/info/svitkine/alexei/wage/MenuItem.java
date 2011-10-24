@@ -2,6 +2,9 @@ package info.svitkine.alexei.wage;
 
 import java.awt.Font;
 
+import lombok.Getter;
+
+
 public class MenuItem {
 	public static final int BOLD = 1;
 	public static final int ITALIC = 2;
@@ -11,10 +14,10 @@ public class MenuItem {
 	public static final int CONDENSED = 32;
 	public static final int EXTENDED = 64;
 	
-	private String text;
-	private int style;
-	private char shortcut;
-	private boolean enabled;
+	@Getter private String text;
+	@Getter private int style;
+	@Getter private char shortcut;
+	@Getter private boolean enabled;
 
 	public MenuItem(String text, int style, char shortcut, boolean enabled) {
 		this.text = text;
@@ -34,25 +37,9 @@ public class MenuItem {
 	public MenuItem(String text) {
 		this(text, 0, (char) 0);
 	}
-
-	public String getText() {
-		return text;
-	}
-	
-	public int getStyle() {
-		return style;
-	}
-	
-	public char getShortcut() {
-		return shortcut;
-	}
 	
 	public boolean hasShortcut() {
 		return shortcut != 0;
-	}
-	
-	public boolean isEnabled() {
-		return enabled;
 	}
 	
 	public void performAction() {

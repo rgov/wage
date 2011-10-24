@@ -3,6 +3,7 @@ package info.svitkine.alexei.wage;
 import java.util.Arrays;
 import java.util.Iterator;
 
+
 public class MenuBar implements Iterable<Menu> {
 	private Menu[] menus;
 

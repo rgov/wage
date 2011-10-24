@@ -10,6 +10,7 @@ import java.util.TimerTask;
 
 import javax.swing.*;
 
+
 public class GameWindow extends JFrame {
 	private World world;
 	private Engine engine;

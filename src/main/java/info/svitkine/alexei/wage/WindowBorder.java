@@ -8,6 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.AbstractBorder;
 
+import lombok.Getter;
+import lombok.Setter;
+
+
 public class WindowBorder extends AbstractBorder {
 	private static final long serialVersionUID = -3235368186322519050L;
 
@@ -27,11 +31,11 @@ public class WindowBorder extends AbstractBorder {
 	public static final int BORDER_SHAPE = 11;
 	public static final int NUM_LOCATIONS = 12;
 
-	private String title = null;
-	private boolean closeable = true;
-	private boolean closeBoxPressed = false;
-	private boolean scrollable = false;
-	private boolean active = true;
+	@Getter @Setter private String title = null;
+	@Getter @Setter private boolean closeable = true;
+	@Getter @Setter private boolean closeBoxPressed = false;
+	@Getter @Setter private boolean scrollable = false;
+	@Getter @Setter private boolean active = true;
 
 	private static void drawBox(Graphics g, int x, int y, int w, int h) {
 		g.setColor(Color.WHITE);
@@ -173,45 +177,5 @@ public class WindowBorder extends AbstractBorder {
 		}
  		shapes[BORDER_SHAPE] = getBorderShape(c);
 		return shapes;
-	}
-
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
-	public boolean isCloseable() {
-		return closeable;
-	}
-
-	public void setCloseable(boolean closeable) {
-		this.closeable = closeable;
-	}
-
-	public boolean isScrollable() {
-		return scrollable;
-	}
-
-	public void setScrollable(boolean scrollable) {
-		this.scrollable = scrollable;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public boolean isCloseBoxPressed() {
-		return closeBoxPressed;
-	}
-
-	public void setCloseBoxPressed(boolean closeBoxPressed) {
-		this.closeBoxPressed = closeBoxPressed;
 	}
 }

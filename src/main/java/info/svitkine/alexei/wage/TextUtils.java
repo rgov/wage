@@ -1,5 +1,6 @@
 package info.svitkine.alexei.wage;
 
+
 public class TextUtils {
 	public static final int GENDER_HE = 0;
 	public static final int GENDER_SHE = 1;

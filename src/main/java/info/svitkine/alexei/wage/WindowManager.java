@@ -18,8 +18,11 @@ import javax.swing.Timer;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.event.MouseInputListener;
 
+import lombok.Getter;
+
+
 public class WindowManager extends JPanel implements ComponentListener {
-	private JComponent modalDialog;
+	@Getter private JComponent modalDialog;
 	private MenuBarRenderer menubar;
 
 	public WindowManager() {
@@ -57,10 +60,6 @@ public class WindowManager extends JPanel implements ComponentListener {
 		super.add(dialog);
 		setComponentZOrder(dialog, 0);
 		modalDialog = dialog;
-	}
-	
-	public JComponent getModalDialog() {
-		return modalDialog;
 	}
 	
 	private static void repaintShape(JComponent c, Shape s) {

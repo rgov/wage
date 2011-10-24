@@ -1,5 +1,9 @@
 package info.svitkine.alexei.wage;
 
+import lombok.Getter;
+import lombok.Setter;
+
+
 public class Context {
 	/** The base physical accuracy of the player. */
 	public static final int PHYS_ACC_BAS = 0;
@@ -38,61 +42,18 @@ public class Context {
 	/** The current spiritual strength of the player. */
 	public static final int SPIR_STR_CUR = 17;
 
-	private short visits; // Number of scenes visited, including repeated visits
-	private short kills;  // Number of characters killed
-	private short experience;
-	private boolean frozen;
-	private short[] userVariables;
-
-	public Context() {
-		userVariables = new short[26 * 9];
-	}
-	
-	public short[] getUserVariables() {
-		return userVariables;
-	}
-
-	public void setUserVariables(short[] vars) {
-		this.userVariables = vars;
-	}
-
+    // XXX visits, kills, experiences were shorts, does it matter?
+    @Getter @Setter private int visits; // Number of scenes visited, including repeated visits
+	@Getter @Setter private int kills;  // Number of characters killed
+	@Getter @Setter private int experience;
+	@Getter @Setter private boolean frozen;
+	@Getter @Setter private short[] userVariables = new short[26 * 9];
+    
 	public short getUserVariable(int index) {
 		return userVariables[index];
 	}
 
 	public void setUserVariable(int index, short value) {
 		userVariables[index] = value;
-	}
-
-	public short getVisits() {
-		return visits;
-	}
-
-	public void setVisits(int visits) {
-		this.visits = (short) visits;
-	}
-
-	public short getKills() {
-		return kills;
-	}
-
-	public void setKills(int kills) {
-		this.kills = (short) kills;
-	}
-	
-	public short getExperience() {
-		return experience;
-	}
-
-	public void setExperience(int experience) {
-		this.experience = (short) experience;
-	}
-
-	public boolean isFrozen() {
-		return frozen;
-	}
-
-	public void setFrozen(boolean frozen) {
-		this.frozen = frozen;
 	}
 }

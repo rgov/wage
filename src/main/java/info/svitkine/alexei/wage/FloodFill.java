@@ -2,6 +2,7 @@ package info.svitkine.alexei.wage;
 
 import java.util.LinkedList;
 
+
 public class FloodFill<T> {
 	private LinkedList<int[]> queue;
 	private boolean[][] visited;

@@ -6,6 +6,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import lombok.Getter;
+import lombok.Setter;
+
+
 public class State {
 
 	public static final int VARS_INDEX = 0x005E;
@@ -16,266 +20,57 @@ public class State {
 	public static final int OBJ_SIZE = 0x0010;
 	
 	// important global info
-	private short numScenes;
-	private short numChars;
-	private short numObjs;
+	@Getter @Setter private short numScenes;
+	@Getter @Setter private short numChars;
+	@Getter @Setter private short numObjs;
 	
 	// unique world id (int)
-	private int worldSignature;
+	@Getter @Setter private int worldSignature;
 	
 	// global status vars
-	private int visitNum;
-	private int loopNum;
-	private int killNum;
-	private int exp;
-	private int aim;
-	private int opponentAim;
+	@Getter @Setter private int visitNum;
+	@Getter @Setter private int loopNum;
+	@Getter @Setter private int killNum;
+	@Getter @Setter private int exp;
+	@Getter @Setter private int aim;
+	@Getter @Setter private int opponentAim;
 
 	// information about player character
-	private int basePhysStr;
-	private int basePhysHp;
-	private int basePhysArm;
-	private int basePhysAcc;
-	private int baseSprtStr;
-	private int baseSprtHp;
-	private int baseSprtArm;
-	private int baseSprtAcc;
-	private int baseRunSpeed;
+	@Getter @Setter private int basePhysStr;
+	@Getter @Setter private int basePhysHp;
+	@Getter @Setter private int basePhysArm;
+	@Getter @Setter private int basePhysAcc;
+	@Getter @Setter private int baseSprtStr;
+	@Getter @Setter private int baseSprtHp;
+	@Getter @Setter private int baseSprtArm;
+	@Getter @Setter private int baseSprtAcc;
+	@Getter @Setter private int baseRunSpeed;
 	
 	// hex offsets within the save file
-	private int chrsHexOffset;
-	private int objsHexOffset;
-	private int playerHexOffset;	
-	private int curSceneHexOffset = 0;
+	@Getter @Setter private int chrsHexOffset;
+	@Getter @Setter private int objsHexOffset;
+	@Getter @Setter private int playerHexOffset;	
+	@Getter @Setter private int curSceneHexOffset = 0;
 	
 	// info about non-player characters related to the current scene
-	private int presCharHexOffset = -1;		// resource id of character present in current scene
-	private int runCharHexOffset = -1;		// hex index to character who just ran away
+	@Getter @Setter private int presCharHexOffset = -1;		// resource id of character present in current scene
+	@Getter @Setter private int runCharHexOffset = -1;		// hex index to character who just ran away
 	
 	// are we wearing anything?
-	private int helmetHexOffset = -1;
-	private int shieldHexOffset = -1;
-	private int chestArmHexOffset = -1;
-	private int sprtArmHexOffset = -1;
+	@Getter @Setter private int helmetHexOffset = -1;
+	@Getter @Setter private int shieldHexOffset = -1;
+	@Getter @Setter private int chestArmHexOffset = -1;
+	@Getter @Setter private int sprtArmHexOffset = -1;
 	
-	private short[] userVars;
+	@Getter @Setter private short[] userVars = new short[26 * 9];
 	
-	private byte[] sceneData;
-	private byte[] chrData;
-	private byte[] objData;
+	@Getter @Setter private byte[] sceneData;
+	@Getter @Setter private byte[] chrData;
+	@Getter @Setter private byte[] objData;
 	
-	private boolean valid;
+	@Getter @Setter private boolean valid = false;
 	
-	public State() {
-		this.valid = false;
-		userVars = new short[26 * 9];
-	}
-
-	public short getNumScenes() {
-		return numScenes;
-	}
-	public void setNumScenes(short numScenes) {
-		this.numScenes = numScenes;
-	}
-	public short getNumChars() {
-		return numChars;
-	}
-	public void setNumChars(short numChars) {
-		this.numChars = numChars;
-	}
-	public short getNumObjs() {
-		return numObjs;
-	}
-	public void setNumObjs(short numObjs) {
-		this.numObjs = numObjs;
-	}
-	public int getWorldSig() {
-		return worldSignature;
-	}
-	public void setWorldSig(int worldSig) {
-		this.worldSignature = worldSig;
-	}
-	public int getVisitNum() {
-		return visitNum;
-	}
-	public void setVisitNum(int visitNum) {
-		this.visitNum = visitNum;
-	}
-	public int getLoopNum() {
-		return loopNum;
-	}
-	public void setLoopNum(int loopNum) {
-		this.loopNum = loopNum;
-	}
-	public int getKillNum() {
-		return killNum;
-	}
-	public void setKillNum(int killNum) {
-		this.killNum = killNum;
-	}
-	public int getExp() {
-		return exp;
-	}
-	public void setExp(int exp) {
-		this.exp = exp;
-	}
-	public int getAim() {
-		return aim;
-	}
-	public void setAim(int aim) {
-		this.aim = aim;
-	}
-	public int getOpponentAim() {
-		return opponentAim;
-	}
-	public void setOpponentAim(int opponentAim) {
-		this.opponentAim = opponentAim;
-	}
-	public int getBasePhysStr() {
-		return basePhysStr;
-	}
-	public void setBasePhysStr(int physStr) {
-		this.basePhysStr = physStr;
-	}
-	public int getBasePhysHp() {
-		return basePhysHp;
-	}
-	public void setBasePhysHp(int physHp) {
-		this.basePhysHp = physHp;
-	}
-	public int getBasePhysArm() {
-		return basePhysArm;
-	}
-	public void setBasePhysArm(int physArm) {
-		this.basePhysArm = physArm;
-	}
-	public int getBasePhysAcc() {
-		return basePhysAcc;
-	}
-	public void setBasePhysAcc(int physAcc) {
-		this.basePhysAcc = physAcc;
-	}
-	public int getBaseSprtStr() {
-		return baseSprtStr;
-	}
-	public void setBaseSprtStr(int sprtStr) {
-		this.baseSprtStr = sprtStr;
-	}
-	public int getBaseSprtHp() {
-		return baseSprtHp;
-	}
-	public void setBaseSprtHp(int sprtHit) {
-		this.baseSprtHp = sprtHit;
-	}
-	public int getBaseSprtArm() {
-		return baseSprtArm;
-	}
-	public void setBaseSprtArm(int sprtArm) {
-		this.baseSprtArm = sprtArm;
-	}
-	public int getBaseSprtAcc() {
-		return baseSprtAcc;
-	}
-	public void setBaseSprtAcc(int sprtAcc) {
-		this.baseSprtAcc = sprtAcc;
-	}
-	public int getBaseRunSpeed() {
-		return baseRunSpeed;
-	}
-	public void setBaseRunSpeed(int runSpeed) {
-		this.baseRunSpeed = runSpeed;
-	}
-	public int getChrsHexOffset() {
-		return chrsHexOffset;
-	}
-	public void setChrsHexOffset(int chrsHexOffset) {
-		this.chrsHexOffset = chrsHexOffset;
-	}
-	public int getObjsHexOffset() {
-		return objsHexOffset;
-	}
-	public void setObjsHexOffset(int objsHexOffset) {
-		this.objsHexOffset = objsHexOffset;
-	}
-	public int getPlayerHexOffset() {
-		return playerHexOffset;
-	}
-	public void setPlayerHexOffset(int playerHexOffset) {
-		this.playerHexOffset = playerHexOffset;
-	}
-	public int getCurSceneHexOffset() {
-		return curSceneHexOffset;
-	}
-	public void setCurSceneHexOffset(int curSceneHexOffset) {
-		this.curSceneHexOffset = curSceneHexOffset;
-	}
-	public int getPresCharHexOffset() {
-		return presCharHexOffset;
-	}
-	public void setPresCharHexOffset(int presCharOffset) {
-		this.presCharHexOffset = presCharOffset;
-	}
-	public int getRunCharHexOffset() {
-		return runCharHexOffset;
-	}
-	public void setRunCharHexOffset(int runCharIndex) {
-		this.runCharHexOffset = runCharIndex;
-	}
-	public int getHelmetIndex() {
-		return helmetHexOffset;
-	}
-	public void setHelmetIndex(int helmetIndex) {
-		this.helmetHexOffset = helmetIndex;
-	}
-	public int getShieldIndex() {
-		return shieldHexOffset;
-	}
-	public void setShieldIndex(int shieldIndex) {
-		this.shieldHexOffset = shieldIndex;
-	}
-	public int getChestArmIndex() {
-		return chestArmHexOffset;
-	}
-	public void setChestArmIndex(int chestArmIndex) {
-		this.chestArmHexOffset = chestArmIndex;
-	}
-	public int getSprtArmIndex() {
-		return sprtArmHexOffset;
-	}
-	public void setSprtArmIndex(int sprtArmIndex) {
-		this.sprtArmHexOffset = sprtArmIndex;
-	}
-	public short[] getUserVars() {
-		return userVars;
-	}
-	public void setUserVars(short[] userVars) {
-		this.userVars = userVars;
-	}
-	public byte[] getSceneData() {
-		return sceneData;
-	}
-	public void setSceneData(byte[] sceneData) {
-		this.sceneData = sceneData;
-	}
-	public byte[] getChrData() {
-		return chrData;
-	}
-	public void setChrData(byte[] charData) {
-		this.chrData = charData;
-	}
-	public byte[] getObjData() {
-		return objData;
-	}
-	public void setObjData(byte[] objData) {
-		this.objData = objData;
-	}
-	public boolean isValid() {
-		return valid;
-	}
-	public void setValid(boolean valid) {
-		this.valid = valid;
-	}
-	
+    
 	public int getHexOffsetForObj(Obj obj) {
 		if (obj == null)
 			return -1;

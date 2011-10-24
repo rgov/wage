@@ -4,6 +4,10 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
+
+
 public interface Scene {
 	public static final int NORTH = 0;
 	public static final int SOUTH = 1;
@@ -14,14 +18,14 @@ public interface Scene {
 	public static final int RANDOM = 1;
 
 	public static class State {
-		private int worldX;
-		private int worldY;
+		@Getter @Setter private int worldX;
+		@Getter @Setter private int worldY;
 		private boolean[] blocked = new boolean[4];
-		private int soundFrequency; // times a minute, max 3600
-		private int soundType;
-		private boolean visited;
-		private List<Obj> objs = new ArrayList<Obj>();
-		private List<Chr> chrs = new ArrayList<Chr>();
+		@Getter @Setter private int soundFrequency; // times a minute, max 3600
+		@Getter @Setter private int soundType;
+		@Getter @Setter private boolean visited;
+		@Getter private List<Obj> objs = new ArrayList<Obj>();
+		@Getter private List<Chr> chrs = new ArrayList<Chr>();
 
 		public State(Scene scene) {
 			worldX = scene.getWorldX();
@@ -34,60 +38,12 @@ public interface Scene {
 			soundType = scene.getSoundType();
 		}
 
-		public int getWorldX() {
-			return worldX;
-		}
-
-		public void setWorldX(int worldX) {
-			this.worldX = worldX;
-		}
-
-		public int getWorldY() {
-			return worldY;
-		}
-
-		public void setWorldY(int worldY) {
-			this.worldY = worldY;
-		}
-
 		public void setDirBlocked(int dir, boolean blocked) {
 			this.blocked[dir] = blocked;
 		}
 		
 		public boolean isDirBlocked(int dir) {
 			return blocked[dir];
-		}
-
-		public int getSoundFrequency() {
-			return soundFrequency;
-		}
-
-		public void setSoundFrequency(int soundFrequency) {
-			this.soundFrequency = soundFrequency;
-		}
-
-		public int getSoundType() {
-			return soundType;
-		}
-
-		public void setSoundType(int soundType) {
-			this.soundType = soundType;
-		}
-
-		public List<Chr> getChrs() {
-			return chrs;
-		}
-
-		public List<Obj> getObjs() {
-			return objs;
-		}
-
-		public void setVisited(boolean visited) {
-			this.visited = true;
-		}
-		
-		public boolean wasVisited() {
-			return visited;
 		}
 	}
 

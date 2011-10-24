@@ -6,6 +6,7 @@ import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Area;
 
+
 public interface Canvas {
 	public void setColor(Color color);
 	public void setPaint(Paint paint);

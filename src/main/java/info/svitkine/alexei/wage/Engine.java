@@ -727,7 +727,7 @@ public class Engine implements Script.Callbacks, MoveListener {
 				if (obj.getFailureMessage() != null) {
 					appendText(obj.getFailureMessage());
 				}
-				if (obj.getReturnToRandomScene()) {
+				if (obj.isReturnToRandomScene()) {
 					world.move(obj, world.getRandomScene());
 				} else {
 					world.move(obj, world.getStorageScene());

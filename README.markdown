@@ -8,7 +8,7 @@ Building wage
 
 You can build wage with [Apache Maven](http://maven.apache.org) using
 
-`$ mvn install`
+`$ mvn package`
 
 You can then run wage with
 

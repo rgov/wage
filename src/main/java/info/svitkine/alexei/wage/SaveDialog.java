@@ -3,6 +3,7 @@ package info.svitkine.alexei.wage;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+
 public class SaveDialog extends Dialog {
 	public static final String NO_TEXT = "No";
 	public static final String YES_TEXT = "Yes";

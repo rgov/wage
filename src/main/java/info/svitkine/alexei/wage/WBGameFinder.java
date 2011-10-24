@@ -9,6 +9,7 @@ import java.io.RandomAccessFile;
 
 import org.freeshell.gbsmith.rescafe.resourcemanager.ResourceModel;
 
+
 public class WBGameFinder {
 	private static final FileFilter filter = new FileFilter() {
 		public boolean accept(File file) {

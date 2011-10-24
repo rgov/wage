@@ -15,6 +15,7 @@ import java.awt.font.TextLayout;
 
 import javax.swing.JComponent;
 
+
 public class MenuBarRenderer extends JComponent implements MouseListener, MouseMotionListener {
 	private static final int HEIGHT = 19;
 	private static final int PADDING = 6;

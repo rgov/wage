@@ -13,6 +13,7 @@ import javax.swing.JComponent;
 import javax.swing.JRootPane;
 import javax.swing.KeyStroke;
 
+
 public abstract class Utils {
 
 	public static int fourCharsToInt(String str) {

@@ -1,5 +1,6 @@
 package info.svitkine.alexei.wage;
 
+
 public abstract class MacRoman {
 	private static final char[] LOOKUP_TABLE = new char[] {
 		0x00C4,	// LATIN CAPITAL LETTER A WITH DIAERESIS

@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+
 public class StateManager {
 
 	private World world;
@@ -40,7 +41,7 @@ public class StateManager {
 		state.setObjsHexOffset(in.readInt());
 
 		// Unique 8-byte World Signature
-		state.setWorldSig(in.readInt());
+		state.setWorldSignature(in.readInt());
 		
 		// More Counters
 		state.setVisitNum(in.readInt());
@@ -57,16 +58,16 @@ public class StateManager {
 		state.setCurSceneHexOffset(in.readInt());
 
 		// wearing a helmet?
-		state.setHelmetIndex(in.readInt());
+		state.setHelmetHexOffset(in.readInt());
 
 		// holding a shield?
-		state.setShieldIndex(in.readInt());
+		state.setShieldHexOffset(in.readInt());
 
 		// wearing chest armor?
-		state.setChestArmIndex(in.readInt());
+		state.setChestArmHexOffset(in.readInt());
 
 		// wearing spiritual armor?
-		state.setSprtArmIndex(in.readInt());
+		state.setSprtArmHexOffset(in.readInt());
 		
 		// TODO: 
 		System.out.println("UNKNOWN 1:" + in.readShort());	// Usually = FFFF
@@ -145,7 +146,7 @@ public class StateManager {
 		out.writeInt(state.getObjsHexOffset());
 
 		// Unique 8-byte World Signature
-		out.writeInt(state.getWorldSig());
+		out.writeInt(state.getWorldSignature());
 
 		// More Counters
 		out.writeInt(state.getVisitNum());
@@ -162,16 +163,16 @@ public class StateManager {
 		out.writeInt(state.getCurSceneHexOffset());
 
 		// wearing a helmet?
-		out.writeInt(state.getHelmetIndex());
+		out.writeInt(state.getHelmetHexOffset());
 
 		// holding a shield?
-		out.writeInt(state.getShieldIndex());
+		out.writeInt(state.getShieldHexOffset());
 
 		// wearing chest armor?
-		out.writeInt(state.getChestArmIndex());
+		out.writeInt(state.getChestArmHexOffset());
 
 		// wearing spiritual armor?
-		out.writeInt(state.getSprtArmIndex());
+		out.writeInt(state.getSprtArmHexOffset());
 
 		// TODO: 
 		out.writeShort(0xffff);	// ???? - always FFFF
@@ -271,16 +272,16 @@ public class StateManager {
 		state.setRunCharHexOffset(state.getHexOffsetForChr(running));
 
 		// Helmet		
-		state.setHelmetIndex(state.getHexOffsetForObj(player.getState().getArmor(Chr.HEAD_ARMOR)));
+		state.setHelmetHexOffset(state.getHexOffsetForObj(player.getState().getArmor(Chr.HEAD_ARMOR)));
 
 		// Shield
-		state.setShieldIndex(state.getHexOffsetForObj(player.getState().getArmor(Chr.SHIELD_ARMOR)));
+		state.setShieldHexOffset(state.getHexOffsetForObj(player.getState().getArmor(Chr.SHIELD_ARMOR)));
 
 		// Chest Armor
-		state.setChestArmIndex(state.getHexOffsetForObj(player.getState().getArmor(Chr.BODY_ARMOR)));
+		state.setChestArmHexOffset(state.getHexOffsetForObj(player.getState().getArmor(Chr.BODY_ARMOR)));
 
 		// Spiritual Armor
-		state.setSprtArmIndex(state.getHexOffsetForObj(player.getState().getArmor(Chr.MAGIC_ARMOR)));
+		state.setSprtArmHexOffset(state.getHexOffsetForObj(player.getState().getArmor(Chr.MAGIC_ARMOR)));
 		
 		// update user vars
 		updateStateUserVars();
@@ -304,7 +305,7 @@ public class StateManager {
 		// make sure we have a valid state object
 		if (state.isValid()) {
 			// make sure save file is for this game
-			if (world.getSignature() == state.getWorldSig()) {
+			if (world.getSignature() == state.getWorldSignature()) {
 
 				// set player character
 				Chr player = world.getCharByHexOffset(state.getPlayerHexOffset());
@@ -395,13 +396,13 @@ public class StateManager {
 					Obj armor;
 
 					if (type == Chr.HEAD_ARMOR)
-						armor = world.getObjByHexOffset(state.getHelmetIndex());
+						armor = world.getObjByHexOffset(state.getHelmetHexOffset());
 					else if (type == Chr.SHIELD_ARMOR)
-						armor = world.getObjByHexOffset(state.getShieldIndex());
+						armor = world.getObjByHexOffset(state.getShieldHexOffset());
 					else if (type == Chr.BODY_ARMOR)
-						armor = world.getObjByHexOffset(state.getChestArmIndex());
+						armor = world.getObjByHexOffset(state.getChestArmHexOffset());
 					else
-						armor = world.getObjByHexOffset(state.getSprtArmIndex());
+						armor = world.getObjByHexOffset(state.getSprtArmHexOffset());
 
 					if (armor != null) {
 						world.move(armor, player);
@@ -443,7 +444,7 @@ public class StateManager {
 		// the following two bytes are currently unknown
 		stream.writeByte(0);
 		stream.writeByte(0);
-		stream.writeByte(state.wasVisited() ? 0x01 : 0x00);
+		stream.writeByte(state.isVisited() ? 0x01 : 0x00);
 	}
 
 	private void updateStateSceneData() {

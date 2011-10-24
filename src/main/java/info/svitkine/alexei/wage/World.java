@@ -10,41 +10,45 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import lombok.Getter;
+import lombok.Setter;
+
 
 public class World {
 	public static final String STORAGE = "STORAGE@";
 
-	private String name;
-	private int signature;
-	private String creatorCode = "WEDT";
-	private String aboutMessage;
-	private String soundLibrary1;
-	private String soundLibrary2;
-	private boolean weaponsMenuDisabled;
-	private Script globalScript;
-	private String aboutMenuItemName;
-	private String weaponsMenuName = "Weapons";
-	private String commandsMenuName = "Commands";
-	private String defaultCommandsMenu =
+	@Getter @Setter private String name;
+	@Getter @Setter private int signature;
+	@Getter @Setter private String creatorCode = "WEDT";
+	@Getter @Setter private String aboutMessage;
+	@Getter @Setter private String soundLibrary1;
+	@Getter @Setter private String soundLibrary2;
+	@Getter @Setter private boolean weaponsMenuDisabled;
+	@Getter private Script globalScript;
+	@Setter private String aboutMenuItemName;
+	@Getter @Setter private String weaponsMenuName = "Weapons";
+	@Getter @Setter private String commandsMenuName = "Commands";
+	@Getter @Setter private String defaultCommandsMenu =
 		"North/N;South/S;East/E;West/W;Up/U;Down/D;(-;Look/L;Rest/R;Status/T;Inventory/I;Search/F;(-;Open;Close";
-	private String saveBeforeCloseMessage = "Save changes before closing?";
-	private String saveBeforeQuitMessage = "Save changes before quiting?";
-	private String gameOverMessage = "Game Over!";
-	private String revertMessage = "Revert to the last saved version?";
-	private Map<String, Scene> scenes;
-	private Map<String, Obj> objs;
-	private Map<String, Chr> chrs;
-	private Map<String, Sound> sounds;
-	private List<Scene> orderedScenes;
-	private List<Obj> orderedObjs;
-	private List<Chr> orderedChrs;
-	private List<Sound> orderedSounds;
-	private List<byte[]> patterns;
-	private Scene storageScene;
-	private Chr player;
+	@Getter @Setter private String saveBeforeCloseMessage = "Save changes before closing?";
+	@Getter @Setter private String saveBeforeQuitMessage = "Save changes before quiting?";
+	@Getter @Setter private String gameOverMessage = "Game Over!";
+	@Getter @Setter private String revertMessage = "Revert to the last saved version?";
+	@Getter private Map<String, Scene> scenes;
+	@Getter private Map<String, Obj> objs;
+	@Getter private Map<String, Chr> chrs;
+	@Getter private Map<String, Sound> sounds;
+	@Getter private List<Scene> orderedScenes;
+	@Getter private List<Obj> orderedObjs;
+	@Getter private List<Chr> orderedChrs;
+	@Getter private List<Sound> orderedSounds;
+	@Getter private List<byte[]> patterns;
+	@Getter @Setter private Chr player;
+    
 	private List<MoveListener> moveListeners;
+    private Scene storageScene;
 
-	private State currentState;
+	@Getter @Setter private State currentState;
 	
 	public World(Script globalScript) {
 		this.globalScript = globalScript;
@@ -104,22 +108,6 @@ public class World {
 
 	public Scene getPlayerScene() {
 		return player.getState().getCurrentScene();
-	}
-
-	public Script getGlobalScript() {
-		return globalScript;
-	}
-
-	public Map<String, Scene> getScenes() {
-		return scenes;
-	}
-
-	public Map<String, Obj> getObjs() {
-		return objs;
-	}
-
-	public Map<String, Chr> getChrs() {
-		return chrs;
 	}
 	
 	public Scene getSceneByID(short resourceID) {
@@ -181,22 +169,6 @@ public class World {
 			return null;
 		int index = (offset - currentState.getObjsHexOffset()) / State.OBJ_SIZE;
 		return orderedObjs.get(index);
-	}
-
-	public Map<String, Sound> getSounds() {
-		return sounds;
-	}
-
-	public List<byte[]> getPatterns() {
-		return patterns;
-	}
-	
-	public Chr getPlayer() {
-		return player;
-	}
-
-	public void setPlayer(Chr player) {
-		this.player = player;
 	}
 	
 	public Scene getSceneAt(int x, int y) {
@@ -344,107 +316,6 @@ public class World {
 		});
 	}
 
-	public List<Chr> getOrderedChrs() {
-		return orderedChrs;
-	}
-
-	public List<Obj> getOrderedObjs() {
-		return orderedObjs;
-	}
-
-	public List<Scene> getOrderedScenes() {
-		return orderedScenes;
-	}
-
-	public List<Sound> getOrderedSounds() {
-		return orderedSounds;
-	}
-
-	public String getAboutMessage() {
-		return aboutMessage;
-	}
-
-	public void setAboutMessage(String aboutMessage) {
-		this.aboutMessage = aboutMessage;
-	}
-
-	public boolean isWeaponsMenuDisabled() {
-		return weaponsMenuDisabled;
-	}
-
-	public void setWeaponsMenuDisabled(boolean weaponsMenuDisabled) {
-		this.weaponsMenuDisabled = weaponsMenuDisabled;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getSoundLibrary1() {
-		return soundLibrary1;
-	}
-
-	public void setSoundLibrary1(String soundLibrary1) {
-		this.soundLibrary1 = soundLibrary1;
-	}
-
-	public String getSoundLibrary2() {
-		return soundLibrary2;
-	}
-
-	public void setSoundLibrary2(String soundLibrary2) {
-		this.soundLibrary2 = soundLibrary2;
-	}
-
-	public void setCurrentState(State currentState) {
-		this.currentState = currentState;
-	}
-
-	public State getCurrentState() {
-		return currentState;
-	}
-	
-	public void setSignature(int signature) {
-		this.signature = signature;
-	}
-
-	public int getSignature() {
-		return signature;
-	}
-
-	public void setDefaultCommandsMenu(String defaultCommandsMenu) {
-		this.defaultCommandsMenu = defaultCommandsMenu;
-	}
-	
-	public String getDefaultCommandsMenu() {
-		return defaultCommandsMenu;
-	}
-
-	public String getWeaponsMenuName() {
-		return weaponsMenuName;
-	}
-
-	public void setWeaponsMenuName(String weaponsMenuName) {
-		this.weaponsMenuName = weaponsMenuName;
-	}
-
-	public String getCommandsMenuName() {
-		return commandsMenuName;
-	}
-
-	public void setCommandsMenuName(String commandsMenuName) {
-		this.commandsMenuName = commandsMenuName;
-	}
-	
-	public void setAboutMenuItemName(String aboutMenuItemName) {
-		this.aboutMenuItemName = aboutMenuItemName;
-		
-	}
-	
 	public String getAboutMenuItemName() {
 		if (aboutMenuItemName == null) {
 			return "About " + getName() + "...";
@@ -452,43 +323,4 @@ public class World {
 		return aboutMenuItemName.replaceAll("@", getName());
 	}
 
-	public String getSaveBeforeCloseMessage() {
-		return saveBeforeCloseMessage;
-	}
-
-	public void setSaveBeforeCloseMessage(String saveMessage) {
-		this.saveBeforeCloseMessage = saveMessage;
-	}
-
-	public String getSaveBeforeQuitMessage() {
-		return saveBeforeQuitMessage;
-	}
-
-	public void setSaveBeforeQuitMessage(String saveMessage) {
-		this.saveBeforeQuitMessage = saveMessage;
-	}
-
-	public String getGameOverMessage() {
-		return gameOverMessage;
-	}
-
-	public void setGameOverMessage(String gameOverMessage) {
-		this.gameOverMessage = gameOverMessage;
-	}
-
-	public String getRevertMessage() {
-		return revertMessage;
-	}
-
-	public void setRevertMessage(String revertMessage) {
-		this.revertMessage = revertMessage;
-	}
-
-	public String getCreatorCode() {
-		return creatorCode;
-	}
-
-	public void setCreatorCode(String creatorCode) {
-		this.creatorCode = creatorCode;
-	}
 }

@@ -1,5 +1,6 @@
 package info.svitkine.alexei.wage;
 
+
 public interface Weapon {
 	public String getName();
 	public String getOperativeVerb();
